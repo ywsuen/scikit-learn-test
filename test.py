@@ -104,8 +104,6 @@ def svm_classifier_auto(trainX, trainY, testX, testY):
 if __name__ == '__main__':
     
     test_classifiers = ['朴素贝叶斯', 'KNN', 'LR', '决策树', 'SVM']
-<<<<<<< HEAD
-<<<<<<< HEAD
     classifiers = {
         '朴素贝叶斯':naive_bayes_classifier,
         'KNN':knn_classifier,
@@ -115,18 +113,6 @@ if __name__ == '__main__':
         'SVM':svm_classifier,
         #'SVMCV':svm_cross_validation,
         #'GBDT':gradient_boosting_classifier
-=======
-=======
->>>>>>> origin/master
-    classifiers = {'朴素贝叶斯':naive_bayes_classifier,
-                  'KNN':knn_classifier,
-                   'LR':logistic_regression_classifier,
-                  #'RF':random_forest_classifier,
-                   '决策树':decision_tree_classifier,
-                  'SVM':svm_classifier,
-                #'SVMCV':svm_cross_validation,
-                 #'GBDT':gradient_boosting_classifier
->>>>>>> origin/master
     }
     print("读取数据...")
     #trainX, trainY, testX, testY = adultDataset2array.getData()
@@ -147,7 +133,6 @@ if __name__ == '__main__':
         accuracy = metrics.accuracy_score(testY, predict)
         print('\t准确率: %.2f%%' % (100 * accuracy))
 
-<<<<<<< HEAD
     print("---穷举svm部分参数,获得最佳参数---")
     startTime = time.time()
     best, s, worst = svm_classifier_auto(trainX, trainY, testX, testY)
@@ -155,11 +140,3 @@ if __name__ == '__main__':
     print('\t最佳参数:', s)
     print('\t最差准确率: %.2f%%' % (100 * worst))
     print('\t用时: %ds' % (time.time()-startTime))
-=======
-    
-    
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
-    
->>>>>>> origin/master
