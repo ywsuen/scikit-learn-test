@@ -13,7 +13,7 @@ from sklearn import datasets
 import numpy as np
 #import cPickle as pickle
 
-import adultDataset2array
+#import adultDataset2array
 
 #算法核心
 def svm_classifier(trainX, trainY):
