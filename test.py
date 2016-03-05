@@ -105,6 +105,7 @@ if __name__ == '__main__':
     
     test_classifiers = ['朴素贝叶斯', 'KNN', 'LR', '决策树', 'SVM']
 <<<<<<< HEAD
+<<<<<<< HEAD
     classifiers = {
         '朴素贝叶斯':naive_bayes_classifier,
         'KNN':knn_classifier,
@@ -115,6 +116,8 @@ if __name__ == '__main__':
         #'SVMCV':svm_cross_validation,
         #'GBDT':gradient_boosting_classifier
 =======
+=======
+>>>>>>> origin/master
     classifiers = {'朴素贝叶斯':naive_bayes_classifier,
                   'KNN':knn_classifier,
                    'LR':logistic_regression_classifier,
@@ -154,5 +157,9 @@ if __name__ == '__main__':
     print('\t用时: %ds' % (time.time()-startTime))
 =======
     
+    
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
     
 >>>>>>> origin/master
