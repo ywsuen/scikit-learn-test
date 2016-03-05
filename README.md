@@ -1,2 +1,2 @@
 # scikit-learn-test
-一个测试scikit-learn中机器学习模块的例程.
+使用scikit-learn自带的digits数据集,测试scikit-learn提供的几种机器学习模块.
