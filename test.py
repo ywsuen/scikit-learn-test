@@ -22,6 +22,27 @@ def naive_bayes_classifier(trainX, trainY):
     model.fit(trainX, trainY)
     return model
 
+# KNN
+def knn_classifier(trainX, trainY):
+    from sklearn.neighbors import KNeighborsClassifier
+    model = KNeighborsClassifier()
+    model.fit(trainX, trainY)
+    return model
+
+# 逻辑回归
+def logistic_regression_classifier(trainX, trainY):
+    from sklearn.linear_model import LogisticRegression
+    model = LogisticRegression()
+    model.fit(trainX, trainY)
+    return model
+
+# 决策树
+def decision_tree_classifier(trainX, trainY):
+    from sklearn import tree
+    model = tree.DecisionTreeClassifier()
+    model.fit(trainX, trainY)
+    return model
+
 #svm
 def svm_classifier(trainX, trainY):
     from sklearn.svm import SVC
@@ -35,12 +56,12 @@ if __name__ == '__main__':
     data_file=""
     tresh = 0.5
     
-    test_classifiers = ['朴素贝叶斯','SVM']
+    test_classifiers = ['朴素贝叶斯', 'KNN', 'LR', '决策树', 'SVM']
     classifiers = {'朴素贝叶斯':naive_bayes_classifier,
-                  #'KNN':knn_classifier,
-                   #'LR':logistic_regression_classifier,
+                  'KNN':knn_classifier,
+                   'LR':logistic_regression_classifier,
                   #'RF':random_forest_classifier,
-                   #'DT':decision_tree_classifier,
+                   '决策树':decision_tree_classifier,
                   'SVM':svm_classifier,
                 #'SVMCV':svm_cross_validation,
                  #'GBDT':gradient_boosting_classifier
@@ -62,7 +83,7 @@ if __name__ == '__main__':
         model = classifiers[key](trainX, trainY)
         predict = model.predict(testX)
         accuracy = metrics.accuracy_score(testY, predict)
-        print('准确率: %.2f%%' % (100 * accuracy))
+        print('\t准确率: %.2f%%' % (100 * accuracy))
 
     
     
