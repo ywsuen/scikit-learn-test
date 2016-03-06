@@ -13,8 +13,6 @@ from sklearn import datasets
 #import numpy as np
 #import cPickle as pickle
 
-import adultDataset2array
-
 
 
 # 朴素贝叶斯
@@ -36,6 +34,13 @@ def logistic_regression_classifier(trainX, trainY):
     from sklearn.linear_model import LogisticRegression
     model = LogisticRegression()
     model.fit(trainX, trainY)
+    return model
+
+# 随机森林
+def random_forest_classifier(train_x, train_y):
+    from sklearn.ensemble import RandomForestClassifier
+    model = RandomForestClassifier(n_estimators=8)
+    model.fit(train_x, train_y)
     return model
 
 # 决策树
@@ -81,7 +86,6 @@ def svm_classifier_auto(trainX, trainY, testX, testY):
     bestAccuracy = 0.
     bestIdx=[]
     worstAccuracy = 1.
-    count=0
     while idx != None:
         model = SVC(gamma=parametersList[0][idx[0]], \
         C=parametersList[1][idx[1]])
@@ -93,8 +97,6 @@ def svm_classifier_auto(trainX, trainY, testX, testY):
             bestIdx = idx
         if accuracy < worstAccuracy:
             worstAccuracy = accuracy
-        count+=1
-        #print(count, parametersList[0][idx[0]], parametersList[1][idx[1]])
         idx = travese2DList.getNext()
         
     return bestAccuracy, 'gamma='+ str(parametersList[0][bestIdx[0]])\
@@ -103,30 +105,25 @@ def svm_classifier_auto(trainX, trainY, testX, testY):
 
 if __name__ == '__main__':
     
-    test_classifiers = ['朴素贝叶斯', 'KNN', 'LR', '决策树', 'SVM']
+    test_classifiers = ['朴素贝叶斯', 'KNN', 'LR', '随机森林', '决策树', 'SVM']
     classifiers = {
         '朴素贝叶斯':naive_bayes_classifier,
         'KNN':knn_classifier,
         'LR':logistic_regression_classifier,
-        #'RF':random_forest_classifier,
+        '随机森林':random_forest_classifier,
         '决策树':decision_tree_classifier,
         'SVM':svm_classifier,
         #'SVMCV':svm_cross_validation,
         #'GBDT':gradient_boosting_classifier
     }
     print("读取数据...")
-    #trainX, trainY, testX, testY = adultDataset2array.getData()
     digits = datasets.load_digits();
     trainX = digits.data[:1200]
     trainY = digits.target[:1200]
     testX = digits.data[1200:]
     testY = digits.target[1200:]
-    #print("****************************数据预览****************************")
-    #print("\n训练的X\n", trainX, "\n训练的Y\n", trainY, "\n测试的X\n",\
-    #testX, "\n测试的Y\n", testY)
-    #print("**************************数据预览完毕***************************")
     
-    for key in classifiers:#获得字典key
+    for key in classifiers:
         print("---使用%s---" % key)
         model = classifiers[key](trainX, trainY)
         predict = model.predict(testX)
