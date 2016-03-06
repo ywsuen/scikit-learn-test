@@ -13,6 +13,7 @@ from sklearn import datasets
 #import numpy as np
 #import cPickle as pickle
 
+import auxiliaryClass #辅助类
 
 
 # 朴素贝叶斯
@@ -57,31 +58,13 @@ def svm_classifier(trainX, trainY):
     model.fit(trainX, trainY)
     return model
 
-class Traverse2Dlist():
-    def __init__(self, twoDList):
-        self.listLen = len(twoDList)
-        self.idx = [0 for i in range(self.listLen)]
-        self.twoDList = twoDList
-        return
-    def getNext(self):
-        pointer = self.listLen - 1
-        while True:
-            if self.idx[pointer]+1 > len(self.twoDList[pointer])-1:
-                self.idx[pointer] = 0
-                pointer -= 1
-                if pointer == -1:
-                    return None
-            else:
-                self.idx[pointer] += 1
-                return self.idx
-
 def svm_classifier_auto(trainX, trainY, testX, testY):
     from sklearn.svm import SVC
     parametersList = [
         [x*0.0001 for x in range(1,101,10)],#gamma
         [x for x in range(10, 200, 10)]#C
     ]
-    travese2DList = Traverse2Dlist(parametersList)
+    travese2DList = auxiliaryClass.Traverse2Dlist(parametersList)
     idx = travese2DList.getNext()
     bestAccuracy = 0.
     bestIdx=[]
@@ -103,8 +86,7 @@ def svm_classifier_auto(trainX, trainY, testX, testY):
     +' C='+ str(parametersList[1][bestIdx[1]]), worstAccuracy
 
 
-if __name__ == '__main__':
-    
+if __name__ == '__main__':  
     test_classifiers = ['朴素贝叶斯', 'KNN', 'LR', '随机森林', '决策树', 'SVM']
     classifiers = {
         '朴素贝叶斯':naive_bayes_classifier,
@@ -122,6 +104,9 @@ if __name__ == '__main__':
     trainY = digits.target[:1200]
     testX = digits.data[1200:]
     testY = digits.target[1200:]
+    
+    sampleSize = 1797 #样本数量
+    k = 10 #交叉验证时把样本分为k份
     
     for key in classifiers:
         print("---使用%s---" % key)
