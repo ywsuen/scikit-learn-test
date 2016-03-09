@@ -65,10 +65,10 @@ def svm_classifier_auto(trainX, trainY, testX, testY):
         [x for x in range(10, 200, 10)]#C
     ]
     travese2DList = auxiliaryClass.Traverse2Dlist(parametersList)
-    idx = travese2DList.getNext()
     bestAccuracy = 0.
     bestIdx=[]
     worstAccuracy = 1.
+    idx = travese2DList.getNext()
     while idx != None:
         model = SVC(gamma=parametersList[0][idx[0]], \
         C=parametersList[1][idx[1]])
